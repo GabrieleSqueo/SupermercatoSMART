@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
 import esempioComponente from "../esempioComponente/esempioComponente"
+import EsempioComponenteb from "../componenteb/esempioComponenteb";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,7 +12,8 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div>
-      <p>Ciao</p>
+      <EsempioComponenteb />
+      <p> Ciao</p>
     </div>
   );
 }
