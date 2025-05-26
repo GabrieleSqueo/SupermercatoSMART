@@ -1,19 +1,25 @@
-import type { Route } from "./+types/home";
-import esempioComponente from "../esempioComponente/esempioComponente"
-import EsempioComponenteb from "../componenteb/esempioComponenteb";
+import type { Route } from "../types/home";
+import { AuthProvider } from "../contexts/AuthContext";
+import LandingPage from "../components/LandingPage";
+import Dashboard from "../components/Dashboard";
+import { useAuth } from "../contexts/AuthContext";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "SupermercatoSMART" },
+    { name: "description", content: "La tua piattaforma per la spesa intelligente" },
   ];
+}
+
+function HomeContent() {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <Dashboard /> : <LandingPage />;
 }
 
 export default function Home() {
   return (
-    <div>
-      <EsempioComponenteb />
-      <p> Ciao</p>
-    </div>
+    <AuthProvider>
+      <HomeContent />
+    </AuthProvider>
   );
 }
