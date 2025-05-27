@@ -4,7 +4,8 @@ import type { ReactNode } from 'react';
 //definizione della variabile e delle funzioni
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  isLogging: boolean;
+  login: () => void;  
   logout: () => void;
 }
 
@@ -13,10 +14,11 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLogging, setIsLogging] = useState(false)
 
   //funzione per il login
   const login = () => {
-    setIsAuthenticated(true);
+    setIsLogging(true);
   };
 
   //funzione per il logout
@@ -25,7 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLogging, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

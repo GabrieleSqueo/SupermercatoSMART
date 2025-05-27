@@ -3,6 +3,7 @@ import { AuthProvider } from "../contexts/AuthContext";
 import LandingPage from "../components/LandingPage";
 import Dashboard from "../components/Dashboard";
 import { useAuth } from "../contexts/AuthContext";
+import Login from "~/components/Login";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,8 +13,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 function HomeContent() {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? <Dashboard /> : <LandingPage />;
+
+  const { isAuthenticated, isLogging } = useAuth();
+  return (
+    isLogging ? <Login /> :
+    isAuthenticated ? <Dashboard /> : <LandingPage />
+  );
 }
 
 export default function Home() {

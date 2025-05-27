@@ -1,4 +1,5 @@
 import { useAuth } from '../contexts/AuthContext';
+import "./Landing.css"
 
 export default function LandingPage() {
   const { login } = useAuth();
