@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
+//connessione al database
 export async function connectDB() {
   try {
     if (mongoose.connection.readyState === 0) {
@@ -14,6 +15,7 @@ export async function connectDB() {
   }
 }
 
+//disconnessione dal database
 export async function disconnectDB() {
   try {
     await mongoose.disconnect();
