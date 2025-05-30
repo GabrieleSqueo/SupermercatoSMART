@@ -1,0 +1,96 @@
+/* Importa font da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
+
+/* Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.landing-container {
+  background: linear-gradient(135deg, #007BFF, #00AEEF);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Titolo artistico sopra il box */
+.landing-title {
+  font-family: 'Satisfy', cursive;
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Box centrale */
+.landing-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  max-width: 700px;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+/* Testo descrizione */
+.description-text {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Lista delle funzionalità */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+.features-list li {
+  margin: 0.4rem 0;
+  transition: transform 0.3s ease;
+}
+
+.features-list li:hover {
+  transform: scale(1.05);
+}
+
+/* Bottone */
+.login-button {
+  background-color: white;
+  color: #007BFF;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+/* Animazione */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

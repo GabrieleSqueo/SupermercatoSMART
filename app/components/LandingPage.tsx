@@ -1,23 +1,31 @@
 import { useAuth } from '../contexts/AuthContext';
-import "./Landing.css"
-
+import "./Landing.css";
 export default function LandingPage() {
   const { login } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-black">
-      <div className="max-w-2xl text-center p-8 bg-white rounded-lg shadow-lg">
-        <h1 className="text-4xl font-bold mb-6">Benvenuto in SupermercatoSMART</h1>
-        <p className="text-lg mb-8 ">
-          Accedi per accedere a tutte le funzionalità della nostra piattaforma
+    <div className="landing-container">
+     <div className="header-logo">
+       <img src="/Users/costantinapesce/Downloads/logo.png" alt="Logo" className="logo-img" />
+        <h1 className="landing-title">Benvenuto in SupermercatoSMART</h1>
+      </div>
+
+      
+      <div className="landing-box">
+        <p className="description-text">
+          Il supermercato del futuro è già qui.<br />
+          SupermercatoSMART ti offre una spesa intelligente, veloce e personalizzata, direttamente dal tuo smartphone.
         </p>
-        <button
-          onClick={login}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Accedi
+        <ul className="features-list">
+          <li>🛒 Tanti prodotti e disponibilità</li>
+          <li>📦 Raccomandazioni basate sulle tue abitudini</li>
+          <li>🚀 Spesa pronta al ritiro e tracking delle consegne in real time</li>
+          <li>📱 Controllo completo via app</li>
+        </ul>
+        <button className="login-button" onClick={login}>
+          Inizia ora
         </button>
       </div>
     </div>
   );
-} 
+}
