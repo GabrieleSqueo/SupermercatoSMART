@@ -1,4 +1,5 @@
 import { useAuth } from '../contexts/AuthContext';
+import logo from "../../public/logo.png"
 import "./Landing.css";
 export default function LandingPage() {
   const { login } = useAuth();
@@ -6,7 +7,7 @@ export default function LandingPage() {
   return (
     <div className="landing-container">
      <div className="header-logo">
-       <img src="/Users/costantinapesce/Downloads/logo.png" alt="Logo" className="logo-img" />
+        <img src={logo} alt="Logo" className="logo-img" />
         <h1 className="landing-title">Benvenuto in SupermercatoSMART</h1>
       </div>
 
