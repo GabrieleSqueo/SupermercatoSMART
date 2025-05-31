@@ -4,6 +4,7 @@ import LandingPage from "../components/LandingPage";
 import Dashboard from "../components/Dashboard";
 import { useAuth } from "../contexts/AuthContext";
 import Login from "~/components/Login";
+import Register from "~/components/Register";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -16,7 +17,7 @@ function HomeContent() {
 
   const { isAuthenticated, isLogging } = useAuth();
   return (
-    isLogging ? <Login /> :
+    isLogging ? <Register /> :
     isAuthenticated ? <Dashboard /> : <LandingPage />
   );
 }
