@@ -6,3 +6,4 @@
 /build/
 *.node
 app/.env
+.env
