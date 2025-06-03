@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// Carica le variabili d'ambiente dal file .env
+dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
