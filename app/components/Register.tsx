@@ -6,7 +6,6 @@ const [password,setPassword]=useState("");
 
 const  handleSubmit= async (e: any)=>{
     e.preventDefault()
-    console.log("Sono nel primo try")
     try {
         console.log("Sono nel primo try")
         const res = await fetch("http://localhost:5000/api/register", {
@@ -25,10 +24,8 @@ const  handleSubmit= async (e: any)=>{
         }
 
         console.log("Registrazione completata");
-        // You might want to redirect or show a success message here
     } catch (error: any) {
         console.error("Errore:", error.message);
-        // You might want to show the error message to the user
     }
 
 }

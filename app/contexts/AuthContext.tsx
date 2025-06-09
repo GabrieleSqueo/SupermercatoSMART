@@ -7,6 +7,7 @@ interface AuthContextType {
   isLogging: boolean;
   login: () => void;  
   logout: () => void;
+  authenticated: () => void;
 }
 
 //definizione del contesto: AuthContext è il nome, e AuthContextType è il tipo
@@ -21,13 +22,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLogging(true);
   };
 
+  const authenticated = () => {
+    setIsAuthenticated(true);
+    setIsLogging(false)
+  }
+
   //funzione per il logout
   const logout = () => {
     setIsAuthenticated(false);
   };
 
+  
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLogging, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLogging, login, logout, authenticated}}>
       {children}
     </AuthContext.Provider>
   );

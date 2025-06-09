@@ -1,14 +1,36 @@
 import React, {useState} from 'react'
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [data, setData] = useState({});
+    const { authenticated } = useAuth();
+    
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        // Qui puoi gestire la logica di login (es. chiamata API)
-        console.log("Email:", email);
-        console.log("Password:", password);
+        try {
+            const res = await fetch("http://localhost:5000/api/login", {
+            body: JSON.stringify({
+                email: email,
+                password: password
+            }),
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            });
+            if (res.ok) {
+                const data = await res.json();
+                authenticated();
+                setData({message: data.message, status: res.status});
+            } else {
+                const data = await res.json();
+                setData({message: data.message, status: res.status});
+            }
+        } catch (error) {
+
+            setData(error as string);
+        }
     };
 
     return (
@@ -50,6 +72,7 @@ const Login = () => {
             >
             Accedi
             </button>
+            {data ? data.status === 200 ? <p className="text-sm text-green-500 text-center">{data.message}</p> : <p className="text-sm text-red-500 text-center">{data.message}</p> : null}
         </form>
         </div>
   )

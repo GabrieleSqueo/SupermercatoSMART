@@ -17,7 +17,7 @@ function HomeContent() {
 
   const { isAuthenticated, isLogging } = useAuth();
   return (
-    isLogging ? <Register /> :
+    isLogging ? <Login /> :
     isAuthenticated ? <Dashboard /> : <LandingPage />
   );
 }
