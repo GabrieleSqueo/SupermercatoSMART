@@ -12,15 +12,24 @@ export function meta({}: Route.MetaArgs) {
     { name: "description", content: "La tua piattaforma per la spesa intelligente" },
   ];
 }
-//funzione per il contenuto della home  
-function HomeContent() {
 
-  const { isAuthenticated, isLogging } = useAuth();
+// Funzione per il contenuto della home
+function HomeContent() {
+  const { isAuthenticated, isLogging, isRegistering } = useAuth();
+
   return (
-    isLogging ? <Login /> :
-    isAuthenticated ? <Dashboard /> : <LandingPage />
+    isLogging ? (
+      <Login />
+    ) : isRegistering ? (
+      <Register />
+    ) : isAuthenticated ? (
+      <Dashboard />
+    ) : (
+      <LandingPage />
+    )
   );
 }
+
 
 //funzione per il componente Home
 export default function Home() {

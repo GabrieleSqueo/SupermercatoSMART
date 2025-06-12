@@ -5,9 +5,12 @@ import type { ReactNode } from 'react';
 interface AuthContextType {
   isAuthenticated: boolean;
   isLogging: boolean;
+  isRegistering:boolean;
   login: () => void;  
   logout: () => void;
   authenticated: () => void;
+  register:()=>void;
+  registered: () => void;
 }
 
 //definizione del contesto: AuthContext è il nome, e AuthContextType è il tipo
@@ -16,6 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogging, setIsLogging] = useState(false)
+  const  [isRegistering, setIsRegistering]=useState(false)
 
   //funzione per il login
   const login = () => {
@@ -32,10 +36,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuthenticated(false);
   };
 
-  
+   //funzione per il register
+  const register = () => {
+     setIsRegistering(true); 
+    setIsLogging(false);
+  };
 
+const registered = () => {
+  setIsAuthenticated(true);
+  setIsRegistering(false);
+};
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLogging, login, logout, authenticated}}>
+    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering,login, logout, register, authenticated, registered }}>
       {children}
     </AuthContext.Provider>
   );
