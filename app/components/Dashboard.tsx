@@ -1,4 +1,3 @@
-import { useAuth } from '../contexts/AuthContext';
 import Navbar from './dashboardComponents/navbar';
 import ProductItem from './dashboardComponents/productItem';
 
