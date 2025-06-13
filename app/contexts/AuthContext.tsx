@@ -47,7 +47,7 @@ const registered = () => {
   setIsRegistering(false);
 };
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering,login, logout, register, authenticated, registered }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering, login, logout, register, authenticated, registered }}>
       {children}
     </AuthContext.Provider>
   );

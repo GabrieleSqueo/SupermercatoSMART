@@ -7,10 +7,12 @@ const app = express()
 const PORT = 5000;
 
 // Middleware
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173'}
+))
 app.use(express.json())
 
-// Connect to MongoDB
+// Connessione a MongoDB
 connectDB()
 .then(() => {
     console.log("Database connesso con successo");
@@ -21,7 +23,7 @@ connectDB()
 
 app.use("/api", auth)
 
-// Error handling middleware
+// Gestopme dell'errore nella connessione
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: "Errore del server" });

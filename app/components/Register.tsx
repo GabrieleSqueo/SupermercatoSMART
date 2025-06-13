@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useAuth } from "~/contexts/AuthContext";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const {login} = useAuth()
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -75,13 +78,23 @@ const Register = () => {
         </div>
 
         <button
-  type="submit"
-  className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition"
->
-  Registra
-</button>
-
+          type="submit"
+          className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition"
+        >
+          Registra
+        </button>
+        <div className="text-center pt-4">
+          <p className="text-sm text-gray-700">Non hai un account?</p>
+          <button
+            type="button"
+            onClick= {login}
+            className="mt-2 text-blue-700 hover:underline font-medium"
+          >
+            Vai al login
+          </button>
+        </div>
       </form>
+      
     </div>
   );
 };
