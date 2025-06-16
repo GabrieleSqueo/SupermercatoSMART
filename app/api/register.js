@@ -10,7 +10,6 @@ const register = async (req, res, next) => {
       return res.status(400).json({message: "Tutti i campi sono obligatori"});
     }
 
-    // Check if user exists with detailed logging
     console.log("Verifico se l'email esiste:", email);
     const existingUser = await User.findOne({email});
     console.log("Risultato ricerca utente:", existingUser ? "Utente trovato" : "Nessun utente trovato");

@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import auth from "./routes/auth.js"
+import products from "./routes/products.js"
 import { connectDB } from "./utils/db.js"   
 
 const app = express()
@@ -8,7 +9,7 @@ const PORT = 5000;
 
 // Middleware
 app.use(cors({
-  origin: '*',  // Allow all origins during development
+  origin: '*',  
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }))
@@ -24,8 +25,9 @@ connectDB()
 });
 
 app.use("/api", auth)
+app.use("/api", products)
 
-// Gestopme dell'errore nella connessione
+// Gestore dell'errore nella connessione
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: "Errore del server" });

@@ -1,13 +1,31 @@
+import { useEffect, useState } from 'react';
 import Navbar from './dashboardComponents/navbar';
 import ProductItem from './dashboardComponents/productItem';
 
 export default function Dashboard() {
-    const cipolla = {
-      nome: "cipolla",
-      prezzo: "40",
-      descrizione: "mangiare",
-      immagine: "image.png"
+  const [prodotti, setProdotti] = useState([])
+  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" }
+        })
+
+        if (!res.ok) {
+          throw new Error("Errore nei prodotti");
+        }
+        const data = await res.json();
+        setProdotti(data);
+      } catch (error) {
+        console.error("Errore:", error);
+      }
     }
+
+    fetchProducts();
+  }, []); 
+
   return (
     <div className="min-h-screen bg-gray-100 p-8 text-black">
     
@@ -25,6 +43,9 @@ export default function Dashboard() {
               <p>Gestisci la tua lista della spesa</p>
             </div>
           </div>
+          {prodotti.map((prod) => 
+            <ProductItem prodotto={prod} />
+          )}
         </div>
       </div>
     </div>
