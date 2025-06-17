@@ -1,6 +1,9 @@
 import { useState } from "react"
+import { useAuth } from "~/contexts/AuthContext";
 
 const NewProducts =()=>{
+    const {authenticated} = useAuth()
+
     const [name,setName] = useState("");
     const [prezzo,setPrezzo] = useState("");
     const [descrizione,setDescrizione] = useState("");
@@ -25,6 +28,11 @@ const NewProducts =()=>{
 
     return(
         <div>
+            <button 
+                onClick={authenticated}
+                >
+                    Torna indietro
+                </button>
             <form
             onSubmit={handleSubmit}> 
                 <input

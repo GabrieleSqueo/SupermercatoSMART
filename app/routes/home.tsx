@@ -16,13 +16,15 @@ export function meta({}: Route.MetaArgs) {
 
 // Funzione per il contenuto della home
 function HomeContent() {
-  const { isAuthenticated, isLogging, isRegistering } = useAuth();
+  const { isAuthenticated, isLogging, isRegistering, isAddingProduct } = useAuth();
 
   return (
     isLogging ? (
       <Login />
     ) : isRegistering ? (
       <Register />
+    ) : isAddingProduct ? (
+      <NewProducts />
     ) : isAuthenticated ? (
       <Dashboard />
     ) : (

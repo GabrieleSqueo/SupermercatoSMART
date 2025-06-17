@@ -6,6 +6,8 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLogging: boolean;
   isRegistering:boolean;
+  isAddingProduct: boolean;
+  addingProduct: () => void;
   login: () => void;  
   logout: () => void;
   authenticated: () => void;
@@ -19,7 +21,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLogging, setIsLogging] = useState(false)
-  const  [isRegistering, setIsRegistering]=useState(false)
+  const  [isRegistering, setIsRegistering] = useState(false)
+  const [isAddingProduct, setIsAddingProduct] = useState(false)
 
   //funzione per il login
   const login = () => {
@@ -31,6 +34,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuthenticated(true);
     setIsLogging(false)
     setIsRegistering(false)
+    setIsAddingProduct(false)
   }
 
   //funzione per il logout
@@ -44,12 +48,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLogging(false);
   };
 
-const registered = () => {
-  setIsAuthenticated(true);
-  setIsRegistering(false);
-};
+  const registered = () => {
+    setIsAuthenticated(true);
+    setIsRegistering(false);
+  };
+
+  const addingProduct = () => {
+    setIsAddingProduct(true);
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering, login, logout, register, authenticated, registered }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering, isAddingProduct, addingProduct, login, logout, register, authenticated, registered }}>
       {children}
     </AuthContext.Provider>
   );
