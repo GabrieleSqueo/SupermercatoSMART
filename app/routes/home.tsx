@@ -5,6 +5,7 @@ import Dashboard from "../components/Dashboard";
 import { useAuth } from "../contexts/AuthContext";
 import Login from "~/components/Login";
 import Register from "~/components/Register";
+import NewProducts from "../components/dashboardComponents/newProducts";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -25,7 +26,7 @@ function HomeContent() {
     ) : isAuthenticated ? (
       <Dashboard />
     ) : (
-      <LandingPage />
+      <NewProducts />
     )
   );
 }
