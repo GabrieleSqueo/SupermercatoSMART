@@ -24,11 +24,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   //funzione per il login
   const login = () => {
     setIsLogging(true);
+    
   };
 
   const authenticated = () => {
     setIsAuthenticated(true);
     setIsLogging(false)
+    setIsRegistering(false)
   }
 
   //funzione per il logout
