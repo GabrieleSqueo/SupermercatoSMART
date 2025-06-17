@@ -22,6 +22,7 @@ router.get('/products',productMiddleware, async (req, res) => {
 
 router.post("/newProducts", newProductsMiddleware, async(req, res) =>{
   try {
+      console.log(req.productToCreate)
       await req.productToCreate.save()
        res.status(200).json({message: "Prodotto aggiunto con successo" })
   } catch(error) {

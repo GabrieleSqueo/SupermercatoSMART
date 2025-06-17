@@ -3,12 +3,14 @@ import mongoose from "mongoose";
 const productSchema = new mongoose.Schema({
   nome: {
     type: String,
+    unique: true,
     required: true
+    
   },
   prezzo: {
     type: Number,
     required: true,
-    unique: true
+    unique: false
   },
   descrizione: {
     type: String,

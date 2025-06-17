@@ -7,3 +7,4 @@
 *.node
 app/.env
 .env
+app/file.drawio

@@ -26,7 +26,7 @@ function HomeContent() {
     ) : isAuthenticated ? (
       <Dashboard />
     ) : (
-      <NewProducts />
+      <LandingPage />
     )
   );
 }
