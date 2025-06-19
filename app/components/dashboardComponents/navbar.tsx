@@ -18,6 +18,8 @@ const Navbar = () => {
             >
                 Logout
             </button>
+            {//Aggiungere funzione visualizzazione numero elementi nel carrello tramite cookie
+            }
         </div>
   )
 }

@@ -6,6 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import Login from "~/components/Login";
 import Register from "~/components/Register";
 import NewProducts from "../components/dashboardComponents/newProducts";
+import { CookiesProvider } from "react-cookie";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -37,8 +38,10 @@ function HomeContent() {
 //funzione per il componente Home
 export default function Home() {
   return (
+    <CookiesProvider >
     <AuthProvider>
       <HomeContent />
     </AuthProvider>
+    </CookiesProvider>
   );
 }
