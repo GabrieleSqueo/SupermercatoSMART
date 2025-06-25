@@ -15,6 +15,10 @@ const productSchema = new mongoose.Schema({
   descrizione: {
     type: String,
     required: true
+  }, 
+  foto: {
+    type: String,
+    required: false
   }
 });
 

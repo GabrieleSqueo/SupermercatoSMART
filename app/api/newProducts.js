@@ -3,9 +3,9 @@ import Product from "../models/Products.js";
 
 const newProducts = async (req, res, next) => {
     try {
-        const { name, prezzo, descrizione} = req.body;
+        const { name, prezzo, descrizione, foto} = req.body;
         
-        if (!name || !prezzo || !descrizione) {
+        if (!name || !prezzo || !descrizione || !foto) {
             return res.status(400).json({message: "Tutti i campi sono obligatori"});
         } 
         
@@ -15,11 +15,12 @@ const newProducts = async (req, res, next) => {
              return res.status(400).json({message: " Prodotto già esistente"});
         } 
 
-        console.log( " Creo nuvo Prodotto");
+        console.log( "Creo nuvo Prodotto");
         req.productToCreate = new Product({
             nome : name,
             prezzo : Number(prezzo),
             descrizione,
+            foto: foto
         });
 
         next();

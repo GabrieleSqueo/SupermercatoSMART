@@ -7,6 +7,7 @@ const NewProducts =()=>{
     const [name,setName] = useState("");
     const [prezzo,setPrezzo] = useState("");
     const [descrizione,setDescrizione] = useState("");
+    const [foto, setFoto] = useState("")
     
     const handleSubmit = async (e:any) => {
         e.preventDefault();
@@ -16,7 +17,7 @@ const NewProducts =()=>{
                     name : name,
                     prezzo : prezzo,
                     descrizione : descrizione,
-
+                    foto: "./public/productsImages/"+foto
                 }),
                 method : "POST",
                 headers: { "Content-Type": "application/json" },
@@ -28,13 +29,9 @@ const NewProducts =()=>{
 
     return(
         <div>
-            <button 
-                onClick={authenticated}
-                >
-                    Torna indietro
-                </button>
             <form
             onSubmit={handleSubmit}> 
+                <p> Nome</p>
                 <input
                 type = "text"
                 value = {name}
@@ -42,7 +39,7 @@ const NewProducts =()=>{
                 required
                 className="mt-1 w-full px-5 py-3 border-2 border-blue-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-400 text-black text-lg font-semibold placeholder-gray-500"
                 />
-
+                <p> Prezzo</p>
                 <input
                 type = "number"
                 value = {prezzo}
@@ -50,10 +47,19 @@ const NewProducts =()=>{
                 required
                 className="mt-1 w-full px-5 py-3 border-2 border-blue-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-400 text-black text-lg font-semibold placeholder-gray-500"
                 />
+                <p> Descrizione</p>
                 <input
                 type = "text"
                 value = {descrizione}
                 onChange={(e) =>setDescrizione(e.target.value)}
+                required
+                className="mt-1 w-full px-5 py-3 border-2 border-blue-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-400 text-black text-lg font-semibold placeholder-gray-500"
+                />
+                <p> Link foto</p>
+                <input
+                type = "text"
+                value = {foto}
+                onChange={(e) =>setFoto(e.target.value)}
                 required
                 className="mt-1 w-full px-5 py-3 border-2 border-blue-600 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-400 text-black text-lg font-semibold placeholder-gray-500"
                 />
