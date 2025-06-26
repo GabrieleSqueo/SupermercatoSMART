@@ -1,5 +1,5 @@
 /* Importa font da Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
 
 /* Reset */
@@ -11,7 +11,6 @@ body {
 
 .header-logo {
   display: flex;
-
 }
 
 .logo-img {
@@ -27,7 +26,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* contenitore centrato */
   color: white;
   text-align: center;
   padding: 2rem;
@@ -38,26 +37,32 @@ body {
   font-family: 'Satisfy', cursive;
   font-size: 3rem;
   color: white;
-  margin-bottom: 2rem;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   margin-top: auto;
   margin-bottom: auto;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Box centrale */
 .landing-box {
-  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;          /* riferimento per immagine posizionata assolutamente */
   padding: 3rem;
+  padding-right: 80px;         /* spazio a destra per immagine */
+  right: 200px;   
   border-radius: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
-  max-width: 700px;
+  max-width: 200px;            /* box più stretto */
+  margin-left: 0;              /* allineato a sinistra nel contenitore */
   animation: fadeIn 1.2s ease-in-out;
+  text-align: left;            /* testo allineato a sinistra */
+  color: white;
 }
+
 
 /* Testo descrizione */
 .description-text {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -109,3 +114,61 @@ body {
   }
 }
 
+/* Immagine app */
+.landing-image {
+  position: absolute;
+  top: 20px;
+  right: -400px;     /* esce fuori dal bordo destro del box */
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+.landing-box {
+  position: relative;
+  padding: 3rem;
+  padding-right: 120px;      /* spazio a destra più ampio */
+  border-radius: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  max-width: 700px;
+  margin-left: 0;
+  animation: fadeIn 1.2s ease-in-out;
+  text-align: left;
+  color: white;
+  overflow: visible;         /* importante: lascia vedere l'immagine fuori */
+}
+
+.landing-image {
+  position: absolute;
+  top: 20px;
+  right: -450px;             /* aumenta spazio fuori dal box */
+  width: 500px;              /* larghezza fissa per ingrandire */
+  height: auto;
+  object-fit: contain;
+}  
+ .landing-image {
+  position: absolute;
+  top: 20px;
+  right: -380px;
+  width: 400px;  /* o anche 550px per più larghezza */
+  height: auto;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .landing-box {
+    position: relative;
+    padding: 3rem 1rem 3rem 1rem;  /* meno padding a destra */
+    border-radius: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    max-width: 100%;               /* occupa tutta la larghezza */
+    margin-left: 0;
+    animation: fadeIn 1.2s ease-in-out;
+    text-align: center;            /* testo centrato */
+    color: white;
+    overflow: visible;             /* immagine fuori deve vedersi */
+  }
+}

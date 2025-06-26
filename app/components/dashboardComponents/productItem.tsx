@@ -41,14 +41,14 @@ const ProductItem = ({ prodotto }: any) => {
         <img
           src={prodotto.foto}
           alt={prodotto.nome}
-          className="h-24 w-24 object-cover rounded-lg border border-blue-300"
+          className="h-48 w-48  object-cover rounded-lg border border-blue-300"
         />
       )}
       <div className="flex-1">
         <p className="text-blue-900 font-bold text-xl">{prodotto.nome}</p>
         <p className="text-blue-700 font-semibold">{prodotto.prezzo}€</p>
         {prodotto.descrizione && (
-          <p className="text-blue-800 mt-1 text-sm">{prodotto.descrizione}</p>
+          <p className="text-blue-700 italic mt-2 text-sm">{prodotto.descrizione}</p>
         )}
       </div>
       <div className="flex flex-col gap-2">
