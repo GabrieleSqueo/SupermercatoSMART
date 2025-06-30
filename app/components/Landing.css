@@ -172,3 +172,15 @@ body {
     overflow: visible;             /* immagine fuori deve vedersi */
   }
 }
+.presentation {
+  max-width: 700px;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin: 2rem 0 1rem auto;  /* spinge il blocco a destra */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: left;          /* testo allineato a sinistra */
+  backdrop-filter: blur(4px);
+}

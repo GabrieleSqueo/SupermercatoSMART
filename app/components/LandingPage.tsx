@@ -36,6 +36,14 @@ export default function LandingPage() {
           Inizia ora
         </button>
       </div>
+
+    {/* Presentazione in basso a destra */}
+      <div className="presentation">
+        Ehilà! Siamo Gabriele, Sara e Costantina, studenti universitari pugliesi. 
+        Ognuno di noi porta il proprio contributo unico al progetto, e la nostra collaborazione è ciò che ci permette di affrontare le sfide e superarle con successo. 
+        Siamo convinti che, combinando le nostre competenze, possiamo creare qualcosa di veramente utile e innovativo.Abbiamo realizzato un supermercato online dove il cliente può aggiungere ordini in modo semplice e intuitivo.
+    
+      </div>
     </div>
   );
 }
