@@ -2,7 +2,28 @@ import React, { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
 const PaginaCarrello = () => {
-  const [cookies] = useCookies(['carrello'])
+
+  const handleCompra = async(e: any) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/newOrder", {
+        body: JSON.stringify({
+          prodotti: carrelloAttuale,
+          costoTotale: totale,
+          utente: cookiesUtente.utente
+        }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+
+      if (res.ok) {
+        setCookie("carrello", [], { path: '/' })
+      }
+    } catch (error) {
+      console.log({ message: "Errore nella richiesta", status: 500 });
+    }
+  }
+  const [cookiesUtente] = useCookies(['utente'])
+  const [cookies, setCookie] = useCookies(['carrello'])
   const [totale, setTotale] = useState(0)
   const carrelloAttuale = cookies.carrello ? [...cookies.carrello] : []
 
@@ -75,7 +96,13 @@ const PaginaCarrello = () => {
         >
           Totale: {totale} €
         </div>
+        <button 
+        onClick={handleCompra}
+        className='bg-green-500'>
+        Compra
+      </button>
       </div>
+      
     </div>
   )
 }

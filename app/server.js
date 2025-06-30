@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import auth from "./routes/auth.js"
 import products from "./routes/products.js"
+import order from "./routes/order.js"
 import { connectDB } from "./utils/db.js"   
 
 const app = express()
@@ -26,6 +27,7 @@ connectDB()
 
 app.use("/api", auth)
 app.use("/api", products)
+app.use("/api", order)
 
 // Gestore dell'errore nella connessione
 app.use((err, req, res, next) => {
