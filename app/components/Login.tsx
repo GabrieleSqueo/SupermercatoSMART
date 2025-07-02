@@ -37,15 +37,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-700">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 to-cyan-400">
       <form
         onSubmit={handleSubmit}
-        className="bg-blue-200 p-8 rounded-2xl shadow-xl w-full max-w-sm space-y-6"
+        className="bg-white/90 p-10 rounded-3xl shadow-2xl w-full max-w-md space-y-8"
       >
-        <h2 className="text-2xl font-bold italic text-gray-800 text-center">Login</h2>
-        <div className="space-y-4">
+        <h2 className="text-3xl font-bold italic text-center text-blue-700 mb-4">Login</h2>
+        <div className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-blue-700 mb-1">
               Email
             </label>
             <input
@@ -53,11 +53,12 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 w-full px-5 py-3 border-2 border-blue-700 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-400 text-black text-lg font-semibold placeholder-gray-500"
+              className="mt-1 w-full px-5 py-3 border-2 border-blue-400 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 text-black text-lg font-semibold placeholder-gray-400 bg-white"
+              placeholder="Inserisci la tua email"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-semibold text-blue-700 mb-1">
               Password
             </label>
             <input
@@ -65,22 +66,23 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 w-full px-5 py-3 border-2 border-blue-700 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-400 text-black text-lg font-semibold placeholder-gray-500"
+              className="mt-1 w-full px-5 py-3 border-2 border-blue-400 rounded-xl focus:outline-none focus:ring-4 focus:ring-blue-200 text-black text-lg font-semibold placeholder-gray-400 bg-white"
+              placeholder="Inserisci la tua password"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition"
+          className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition text-lg shadow"
         >
           Accedi
         </button>
 
         {data?.message && (
           <p
-            className={`text-sm text-center ${
-              data.status === 200 ? "text-green-500" : "text-red-500"
+            className={`text-sm text-center mt-2 ${
+              data.status === 200 ? "text-green-600" : "text-red-600"
             }`}
           >
             {data.message}
@@ -88,11 +90,11 @@ const Login = () => {
         )}
 
         <div className="text-center pt-4">
-          <p className="text-sm text-gray-700">Non hai un account?</p>
+          <p className="text-sm text-blue-700">Non hai un account?</p>
           <button
             type="button"
             onClick={register}
-            className="mt-2 text-blue-700 hover:underline font-medium"
+            className="mt-2 text-blue-700 hover:underline font-semibold"
           >
             Registrati
           </button>

@@ -36,73 +36,38 @@ const PaginaCarrello = () => {
   }, [cookies.carrello])
 
   return (
-    <div
-      style={{
-        backgroundColor: '#d9f0ff', // celeste chiaro
-        minHeight: '100vh',
-        width: '100%',          // usa 100% invece di 100vw
-        padding: '20px',
-        fontFamily: 'Arial, sans-serif',
-        color: '#003366',
-        boxSizing: 'border-box',
-        margin: 0,
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '500px',
-          margin: '0 auto',
-          backgroundColor: 'white',
-          borderRadius: '8px',
-          padding: '20px',
-          boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-        }}
-      >
-        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Carrello</h2>
-
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center py-8">
+      <div className="w-full max-w-lg mx-auto bg-white/90 rounded-2xl shadow-2xl p-8">
+        <h2 className="text-2xl font-bold text-blue-700 text-center mb-6">Carrello</h2>
         {carrelloAttuale.length === 0 ? (
-          <p style={{ textAlign: 'center' }}>Il carrello è vuoto.</p>
+          <p className="text-center text-blue-700">Il carrello è vuoto.</p>
         ) : (
-          carrelloAttuale.map((prodotto, index) => (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                padding: '10px 0',
-                borderBottom: '1px solid #a3c0ff',
-              }}
-            >
-              <div>
-                <strong>{prodotto.nome}</strong> x{prodotto.quantità}
-                {prodotto.descrizione && (
-                  <div style={{ fontSize: '0.85rem', color: '#004a99' }}>
-                    {prodotto.descrizione}
-                  </div>
-                )}
+          <div className="divide-y divide-blue-100">
+            {carrelloAttuale.map((prodotto, index) => (
+              <div
+                key={index}
+                className="flex justify-between items-start py-4"
+              >
+                <div>
+                  <span className="font-bold text-blue-900">{prodotto.nome}</span> <span className="text-blue-700">x{prodotto.quantità}</span>
+                  {prodotto.descrizione && (
+                    <div className="text-sm text-blue-500 mt-1">{prodotto.descrizione}</div>
+                  )}
+                </div>
+                <div className="font-semibold text-blue-800">{parseFloat(prodotto.prezzo).toFixed(2)} €</div>
               </div>
-              <div>{parseFloat(prodotto.prezzo).toFixed(2)} €</div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
-
-        <div
-          style={{
-            marginTop: '25px',
-            textAlign: 'right',
-            fontWeight: 'bold',
-            fontSize: '1.2rem',
-          }}
-        >
+        <div className="mt-8 text-right font-bold text-xl text-blue-900">
           Totale: {totale} €
         </div>
         <button 
-        onClick={handleCompra}
-        className='bg-green-500'>
-        Compra
-      </button>
+          onClick={handleCompra}
+          className="w-full mt-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow transition text-lg">
+          Compra
+        </button>
       </div>
-      
     </div>
   )
 }
