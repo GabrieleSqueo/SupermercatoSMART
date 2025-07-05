@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useCookies } from 'react-cookie';
 
 const Login = () => {
-  const [cookies, setCookie] = useCookies(['utente'])
+  const [cookies, setCookie] = useCookies(['utente', 'token'])
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState<any>({});
@@ -28,6 +28,7 @@ const Login = () => {
         setData({ message: data.message, status: res.status });
         console.log(data)
         setCookie('utente', data.user.id, { path: '/' })
+        setCookie('token', data.accessToken, { path: '/' })
       } else {
         setData({ message: data.message, status: res.status });
       }

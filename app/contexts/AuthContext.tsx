@@ -8,6 +8,8 @@ interface AuthContextType {
   isRegistering:boolean;
   isAddingProduct: boolean;
   isCheckingCarrello: boolean;
+  isRetrievingOrders: boolean;
+  retrieveOrders: () => void;
   checkCarrello: () => void;
   addingProduct: () => void;
   login: () => void;  
@@ -26,6 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const  [isRegistering, setIsRegistering] = useState(false)
   const [isAddingProduct, setIsAddingProduct] = useState(false)
   const [isCheckingCarrello, setIsCheckingCarrello] = useState(false)
+  const [isRetrievingOrders, setIsRetrievingOrders] = useState(false)
 
   //funzione per il login
   const login = () => {
@@ -48,7 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
    //funzione per il register
   const register = () => {
-     setIsRegistering(true); 
+    setIsRegistering(true); 
     setIsLogging(false);
   };
 
@@ -60,15 +63,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const addingProduct = () => {
     setIsAddingProduct(true);
     setIsCheckingCarrello(false)
+    setIsRetrievingOrders(false)
   }
 
   const checkCarrello = () => {
     setIsCheckingCarrello(true)
     setIsAddingProduct(false)
+    setIsRetrievingOrders(false)
+  }
+
+  const retrieveOrders = () => {
+    setIsRetrievingOrders(true)
+    setIsAddingProduct(false)
+    setIsCheckingCarrello(false)
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering, isAddingProduct, isCheckingCarrello, checkCarrello, addingProduct, login, logout, register, authenticated, registered }}>
+    <AuthContext.Provider value={{ isAuthenticated, isLogging, isRegistering, isAddingProduct, isCheckingCarrello, isRetrievingOrders, retrieveOrders, checkCarrello, addingProduct, login, logout, register, authenticated, registered }}>
       {children}
     </AuthContext.Provider>
   );

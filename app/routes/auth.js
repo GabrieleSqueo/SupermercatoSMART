@@ -1,6 +1,7 @@
 import express from "express"
 import registerMidlleware from "../api/register.js"
 import loginMiddleware from "../api/login.js"
+import jwt from "jsonwebtoken"
 
 const router = express.Router()
 
@@ -17,12 +18,20 @@ router.post("/register", registerMidlleware, async(req, res) => {
 
 router.post("/login", loginMiddleware, async(req, res) => {
     try {
+        // Genera i token
+        const accessToken = jwt.sign(
+            { userId: req.user.id },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '15m' }
+        );
+        
         res.status(200).json({
             message: "Login effettuato con successo",
             user: {
                 id: req.user.id,
                 email: req.user.email
-            }
+            },
+            accessToken: accessToken
         });
     } catch (error) {
         console.error("Errore durante il login:", error);

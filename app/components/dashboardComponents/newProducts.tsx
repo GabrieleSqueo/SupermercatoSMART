@@ -17,7 +17,7 @@ const NewProducts = () => {
           name: name,
           prezzo: prezzo,
           descrizione: descrizione,
-          foto: "./public/productsImages/" + foto
+          foto: "./productsImages/" + foto
         }),
         method: "POST",
         headers: { "Content-Type": "application/json" },
