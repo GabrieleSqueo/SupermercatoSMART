@@ -1,7 +1,7 @@
 import Navbar from './dashboardComponents/navbar';
 import PaginaCarrello from "./dashboardComponents/PaginaCarrello"
 import { useAuth } from '~/contexts/AuthContext';
-import ProductsList from './dashboardComponents/ProductsList';
+import ProductsList from './dashboardComponents/Productslist';
 import NewProducts from './dashboardComponents/newProducts';
 import OrdersList from './dashboardComponents/ordersList';
 
