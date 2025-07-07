@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "src": "routes/home.tsx",
+            "src": "app/root.tsx",
             "use": "@vercel/node"
         },
         {
