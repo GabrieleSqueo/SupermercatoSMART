@@ -1,11 +1,11 @@
-import type { Route } from "../types/home";
-import { AuthProvider } from "../contexts/AuthContext";
-import LandingPage from "../components/LandingPage";
-import Dashboard from "../components/Dashboard";
-import { useAuth } from "../contexts/AuthContext";
+import type { Route } from "../app/types/home";
+import { AuthProvider } from "../app/contexts/AuthContext";
+import LandingPage from "../app/components/LandingPage";
+import Dashboard from "../app/components/Dashboard";
+import { useAuth } from "../app/contexts/AuthContext";
 import Login from "~/components/Login";
 import Register from "~/components/Register";
-import NewProducts from "../components/dashboardComponents/newProducts";
+import NewProducts from "../app/components/dashboardComponents/newProducts";
 import { CookiesProvider } from "react-cookie";
 
 export function meta({}: Route.MetaArgs) {

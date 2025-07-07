@@ -48,6 +48,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   //funzione per il logout
   const logout = () => {
     setIsAuthenticated(false);
+    setIsLogging(false)
+    setIsRegistering(false)
+    setIsAddingProduct(false)
+    setIsCheckingCarrello(false)
+    setIsRetrievingOrders(false)
   };
 
    //funzione per il register
