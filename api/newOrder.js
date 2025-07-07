@@ -1,5 +1,5 @@
 import React from 'react'
-import Order from "../models/Order.js"
+import Order from "../app/models/Order.js"
 
 
 const newOrder = (req, res, next) => {

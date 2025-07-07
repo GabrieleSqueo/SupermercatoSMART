@@ -3,7 +3,7 @@ import cors from "cors"
 import auth from "./routes/auth.js"
 import products from "./routes/products.js"
 import order from "./routes/order.js"
-import { connectDB } from "./utils/db.js"   
+import { connectDB } from "./db.js"   
 
 const app = express()
 const PORT = 5000;

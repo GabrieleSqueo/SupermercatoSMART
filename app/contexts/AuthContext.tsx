@@ -42,6 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsRegistering(false)
     setIsAddingProduct(false)
     setIsCheckingCarrello(false)
+    setIsRetrievingOrders(false)
   }
 
   //funzione per il logout

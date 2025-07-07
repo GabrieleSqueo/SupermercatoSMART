@@ -1,5 +1,5 @@
 import express from 'express';
-import Product from '../models/Products.js';
+import Product from '../app/models/Products.js';
 import productMiddleware from "../api/products.js"
 import newProductsMiddleware from "../api/newProducts.js";
 

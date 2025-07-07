@@ -1,5 +1,5 @@
 import express from "express"
-import Order from "../models/Order.js"
+import Order from "../app/models/Order.js"
 import newOrderMiddleware from "../api/newOrder.js"
 import retrieveOrdersMiddleware from "../api/retrieveOrders.js"
 
