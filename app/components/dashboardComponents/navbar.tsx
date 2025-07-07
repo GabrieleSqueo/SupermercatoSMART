@@ -45,7 +45,7 @@ const Navbar = () => {
                 </button>
 
                 <button
-                    onClick={retrieveOrders}
+                    onClick={logout}
                     className="bg-red-600 text-white px-5 py-2 rounded-lg font-semibold shadow hover:bg-red-700 transition-colors focus:outline-none"
                 >
                     Logout
