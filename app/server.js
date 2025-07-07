@@ -1,9 +1,9 @@
 import express from "express"
 import cors from "cors"
-import auth from "./app/routes/auth.js"
-import products from "./app/routes/products.js"
-import order from "./app/routes/order.js"
-import { connectDB } from "./app/utils/db.js"   
+import auth from "./routes/auth.js"
+import products from "./routes/products.js"
+import order from "./routes/order.js"
+import { connectDB } from "./utils/db.js"   
 
 const app = express()
 const PORT = 5000;
