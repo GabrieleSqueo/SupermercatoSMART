@@ -1,7 +1,7 @@
 import express from 'express';
 import Product from '../models/Products.js';
-import productMiddleware from "../api/products.js"
-import newProductsMiddleware from "../api/newProducts.js";
+import productMiddleware from "../../api/products.js"
+import newProductsMiddleware from "../../api/newProducts.js";
 
 const router = express.Router();
 

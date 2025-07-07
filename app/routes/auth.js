@@ -1,6 +1,6 @@
 import express from "express"
-import registerMidlleware from "../api/register.js"
-import loginMiddleware from "../api/login.js"
+import registerMidlleware from "../../api/register.js"
+import loginMiddleware from "../../api/login.js"
 import jwt from "jsonwebtoken"
 
 const router = express.Router()

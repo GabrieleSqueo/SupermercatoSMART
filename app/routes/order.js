@@ -1,7 +1,7 @@
 import express from "express"
 import Order from "../models/Order.js"
-import newOrderMiddleware from "../api/newOrder.js"
-import retrieveOrdersMiddleware from "../api/retrieveOrders.js"
+import newOrderMiddleware from "../../api/newOrder.js"
+import retrieveOrdersMiddleware from "../../api/retrieveOrders.js"
 
 const router = express.Router()
 
