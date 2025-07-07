@@ -1,7 +1,7 @@
 import Navbar from './dashboardComponents/navbar';
 import PaginaCarrello from "./dashboardComponents/PaginaCarrello"
 import { useAuth } from '~/contexts/AuthContext';
-import Productslist from './dashboardComponents/ProductsList';
+import ProductsList from './dashboardComponents/ProductsList';
 import NewProducts from './dashboardComponents/newProducts';
 import OrdersList from './dashboardComponents/ordersList';
 
@@ -18,7 +18,7 @@ export default function Dashboard() {
             {isCheckingCarrello && <PaginaCarrello />}
             {isAddingProduct  && <NewProducts /> }
             {isRetrievingOrders && <OrdersList />}
-            {!isCheckingCarrello && !isAddingProduct && !isRetrievingOrders && <Productslist />}
+            {!isCheckingCarrello && !isAddingProduct && !isRetrievingOrders && <ProductsList />}
             
           </div>
         </div>
