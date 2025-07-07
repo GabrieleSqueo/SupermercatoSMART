@@ -12,7 +12,7 @@ const Productslist = () => {
           headers: { "Content-Type": "application/json" }
         })
 
-        if (!res.ok) {
+        if (!res.ok) { 
           throw new Error("Errore nei prodotti");
         }
         const data = await res.json();
