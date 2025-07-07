@@ -37,7 +37,7 @@ const Productslist = () => {
         </div>
       </div>
       <div className="space-y-6">
-        {prodotti.map((prod) => <ProductItem prodotto={prod} /> ) }
+        {prodotti && prodotti.map((prod) => <ProductItem prodotto={prod} /> ) }
       </div>
     </div>
   )
