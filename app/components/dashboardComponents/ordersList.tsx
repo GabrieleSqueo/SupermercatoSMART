@@ -21,6 +21,7 @@ const OrdersList = () => {
 
   const fetchOrders = async () => {
     try {
+      console.log(cookies.token);
       setLoading(true);
       setError(null);
 
