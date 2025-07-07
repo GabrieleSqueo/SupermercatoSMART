@@ -2,7 +2,7 @@
   "name": "supermercatosmart",
   "private": true,
   "type": "module",
-  "main": "server.js",
+  "main": "app/root.tsx",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
