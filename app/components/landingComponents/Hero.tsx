@@ -8,11 +8,12 @@ const Hero = () => {
     <div>
         <div className="flex items-center mb-8">
             <img src={logo} alt="Logo" className="w-24 h-24 mr-4 drop-shadow-lg" />
-            <h1 className="font-cursive text-4xl md:text-5xl font-bold text-white drop-shadow-lg">Benvenuto in SupermercatoSMART</h1>
+            <h1 className="font-cursive wrap text-4xl md:text-5xl font-bold text-white drop-shadow-lg">Benvenuto in SupermercatoSMART</h1>
         </div>
 
-        <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 max-w-2xl w-full flex flex-col md:flex-row items-center md:items-start mb-8">
-            <div className="flex-1 text-left text-white">
+        <div className="flex flex-col gap-2 md:flex-row bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 md:p-12 max-w-3xl w-full  items-center md:items-start mb-8">
+           
+            <div className=" text-left text-white">
             <p className="text-lg md:text-2xl mb-6 leading-relaxed font-medium">
                 Il supermercato del futuro è già qui.<br />
                 SupermercatoSMART ti offre una spesa intelligente, veloce e personalizzata, direttamente dal tuo smartphone.
@@ -27,11 +28,14 @@ const Hero = () => {
                 Inizia ora
             </button>
             </div>
-            <img
-            src={appImage}
-            alt="App SupermercatoSMART"
-            className="hidden md:block absolute -right-40 top-8 w-80 max-w-xs drop-shadow-2xl rounded-xl border-4 border-white/30"
-            />
+            <div className="md:w-1/3">
+                <img
+                    src={appImage}
+                    alt="App SupermercatoSMART"
+                    className="w-80 max-w-xs drop-shadow-2xl rounded-xl border-4 border-white/30 mb-6"
+                />
+            </div>
+            
         </div>
     </div>
   )

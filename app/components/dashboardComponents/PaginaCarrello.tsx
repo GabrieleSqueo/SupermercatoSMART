@@ -5,7 +5,7 @@ const PaginaCarrello = () => {
 
   const handleCompra = async(e: any) => {
     try {
-      const res = await fetch("https://supermercato-smart.vercel.app/api/newOrder", {
+      const res = await fetch("http://localhost:5000/api/newOrder", {
         body: JSON.stringify({
           prodotti: carrelloAttuale,
           costoTotale: totale,
