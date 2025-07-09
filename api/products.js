@@ -1,6 +1,8 @@
 import Product from "../app/models/Products.js";
+import { connectDB } from '../db.js';
 
-const products = async (req, res) => {
+export default async function handler(req, res) {
+  await connectDB();
   try {
     const products = await Product.find();
     
@@ -14,5 +16,3 @@ const products = async (req, res) => {
     return res.status(500).json({ message: "Errore del server" });
   }
 }
-
-export default products
