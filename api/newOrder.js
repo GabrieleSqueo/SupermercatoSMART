@@ -2,7 +2,7 @@ import React from 'react'
 import Order from "../app/models/Order.js"
 
 
-const newOrder = (req, res, next) => {
+const newOrder = async (req, res) => {
     
     try {
         
@@ -17,13 +17,13 @@ const newOrder = (req, res, next) => {
         console.log("utente" + utente)
 
         console.log("Creo il nuovo ordine")
-        req.OrderToCreate = new Order({
+        const orderToCreate = new Order({
             prodottiComprati: newProdotti,
             costo: Number(costoTotale),
             userId: utente
         });
-        
-        next()
+        await orderToCreate.save();
+        res.status(200).json({message: "Ordine aggiunto con successo" });
 
     } catch (error) {
         console.error("Errore nel middleware di creazione ordini:", error);

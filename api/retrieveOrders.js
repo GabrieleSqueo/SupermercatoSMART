@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
+import Order from '../models/Order'; // Added import for Order model
 
-const retrieveOrders = (req, res, next) => {
+const retrieveOrders = async (req, res) => {
   try {
     // Verifica il token JWT dall'header Authorization
     const authHeader = req.headers.authorization;
@@ -17,10 +18,18 @@ const retrieveOrders = (req, res, next) => {
     // Aggiungi l'userId alla richiesta per il middleware successivo
     req.userId = userId;
     
-    next();
+    const orders = await Order.find({ userId }).sort({ _id: -1 });
+    const formattedOrders = orders.map(order => ({
+      id: order._id,
+      prodottiComprati: order.prodottiComprati,
+      costo: order.costo,
+      data: order._id.getTimestamp(),
+      userId: order.userId
+    }));
+    res.status(200).json({ success: true, orders: formattedOrders });
   } catch (error) {
-    console.error("Errore nel middleware di recupero ordini:", error);
-    res.status(401).json({ message: "Token non valido" });
+    console.error("Errore nel recupero ordini:", error);
+    res.status(401).json({ message: "Token non valido o errore del server" });
   }
 }
 

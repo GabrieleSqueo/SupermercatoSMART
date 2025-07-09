@@ -1,7 +1,7 @@
 import React from 'react'
 import Product from "../app/models/Products.js";
 
-const newProducts = async (req, res, next) => {
+const newProducts = async (req, res) => {
     try {
         const { name, prezzo, descrizione, foto} = req.body;
         
@@ -16,14 +16,14 @@ const newProducts = async (req, res, next) => {
         } 
 
         console.log( "Creo nuvo Prodotto");
-        req.productToCreate = new Product({
+        const productToCreate = new Product({
             nome : name,
             prezzo : Number(prezzo),
             descrizione,
             foto: foto
         });
-
-        next();
+        await productToCreate.save();
+        res.status(200).json({message: "Prodotto aggiunto con successo" });
     } catch(error) {
         console.error("Errore nel middleware di creazione prodotti:", error);
         res.status(500).json({message: "Errore del server"});
