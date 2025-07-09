@@ -1,3 +1,5 @@
+import Product from "../app/models/Products";
+
 const products = async (req, res) => {
   try {
     const products = await Product.find();
