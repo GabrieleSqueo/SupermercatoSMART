@@ -1,7 +1,7 @@
 import User from "../app/models/User.js";
 import bcrypt from "bcrypt";
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
   try {
     const {name, email, password} = req.body;
     console.log("Dati ricevuti:", { name, email, password: "***" });
@@ -27,7 +27,8 @@ const register = async (req, res, next) => {
       password: hashedPassword
     });
 
-    next();
+    await req.userToCreate.save();
+    res.status(200).json({message: "Utente registrato con successo"});
   } catch (error) {
     console.error("Errore nel middleware di registrazione:", error);
     res.status(500).json({message: "Errore del server"});

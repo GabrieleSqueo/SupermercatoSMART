@@ -20,7 +20,7 @@ const generateTokens = (userId) => {
     return { accessToken, refreshToken };
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
     try {
         const {email, password} = req.body;
     
@@ -56,7 +56,15 @@ const login = async (req, res, next) => {
             maxAge: 7 * 24 * 60 * 60 * 1000 
         });
         
-        next();
+        // Rispondi direttamente qui, oppure passa i dati necessari tramite req e chiama next SOLO se serve
+        res.status(200).json({
+            message: "Login effettuato con successo",
+            user: {
+                id: existingUser._id,
+                email: existingUser.email
+            },
+            accessToken
+        });
     } catch (error) {
         console.error("Errore nel middleware di login:", error);
         res.status(500).json({message: "Errore del server"});
