@@ -38,11 +38,7 @@ export default async function handler(req, res) {
     }
     const { accessToken, refreshToken } = generateTokens(existingUser._id);
     await RefreshToken.create({ token: refreshToken, userId: existingUser._id });
-    res.cookie('jwt', refreshToken, {
-      httpOnly: true,
-      sameSite: 'Strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+    res.setHeader('Set-Cookie', `jwt=${refreshToken}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${7 * 24 * 60 * 60}`);
     res.status(200).json({
       message: "Login effettuato con successo",
       user: {
