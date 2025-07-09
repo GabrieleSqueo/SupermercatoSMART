@@ -17,24 +17,26 @@ app.use(cors({
 app.use(express.json())
 
 // Connessione a MongoDB
+
 connectDB()
-.then(() => {
+  .then(() => {
     console.log("Database connesso con successo");
-})
-.catch((err) => {
+    app.use("/api", auth);
+    app.use("/api", products);
+    app.use("/api", order);
+
+    // Gestore dell'errore nella connessione
+    app.use((err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).json({ message: "Errore del server" });
+    });
+
+    app.listen(PORT, () => {
+      console.log(`Server attivo su http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
     console.error("Errore di connessione al database:", err);
-});
-
-app.use("/api", auth)
-app.use("/api", products)
-app.use("/api", order)
-
-// Gestore dell'errore nella connessione
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: "Errore del server" });
-});
-
-app.listen(PORT, ()=> {
-    console.log(`Server attivo su http://localhost:${PORT}`);
-})
+    // In produzione, esci dal processo se la connessione fallisce
+    process.exit(1);
+  });

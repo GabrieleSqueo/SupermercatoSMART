@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import Order from '../models/Order'; // Added import for Order model
+import Order from '../app/models/Order.js'; // Added import for Order model
 
 const retrieveOrders = async (req, res) => {
   try {
