@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
 import Order from '../app/models/Order.js'; // Added import for Order model
+import { connectDB } from '../db.js';
 
-const retrieveOrders = async (req, res) => {
+export default async function handler(req, res) {
+  await connectDB();
   try {
     // Verifica il token JWT dall'header Authorization
     const authHeader = req.headers.authorization;
@@ -32,5 +34,3 @@ const retrieveOrders = async (req, res) => {
     res.status(401).json({ message: "Token non valido o errore del server" });
   }
 }
-
-export default retrieveOrders;
