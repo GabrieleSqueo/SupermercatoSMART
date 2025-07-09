@@ -25,7 +25,7 @@ const OrdersList = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('http://localhost:5000/api/retrieveOrders', {
+      const response = await fetch(`${import.meta.env.VITE_API_URI}/api/retrieveOrders`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${cookies.token}`,

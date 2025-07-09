@@ -10,7 +10,7 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch(`${import.meta.env.VITE_API_URI}/api/register`, {
         body: JSON.stringify({
           name: name,
           email: email,
