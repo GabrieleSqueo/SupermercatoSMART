@@ -7,7 +7,7 @@ const Productslist = () => {
     useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("./api/products", {
+        const res = await fetch("https://supermercato-smart.vercel.app/api/products", {
           method: "GET",
           headers: { "Content-Type": "application/json" }
         })

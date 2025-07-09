@@ -25,7 +25,7 @@ const OrdersList = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('./api/retrieveOrders', {
+      const response = await fetch('https://supermercato-smart.vercel.app/api/retrieveOrders', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${cookies.token}`,

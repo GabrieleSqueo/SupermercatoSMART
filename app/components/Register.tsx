@@ -10,7 +10,7 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await fetch("./api/register", {
+      const res = await fetch("https://supermercato-smart.vercel.app/api/register", {
         body: JSON.stringify({
           name: name,
           email: email,

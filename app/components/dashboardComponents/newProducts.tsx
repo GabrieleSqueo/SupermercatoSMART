@@ -12,7 +12,7 @@ const NewProducts = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await fetch("./api/newProducts", {
+      const res = await fetch("https://supermercato-smart.vercel.app/api/newProducts", {
         body: JSON.stringify({
           name: name,
           prezzo: prezzo,
