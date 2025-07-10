@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import fotogab from "/fotogab.jpg"
 import fotoco from "/fotoco.jpeg"
 import fotosa from "/fotosa.jpeg"
@@ -13,10 +13,13 @@ const AboutUs = () => {
 
   const [currentImage, setCurrentImage] = useState(0)
   
-  setInterval(() => {
-    setCurrentImage((currentImage + 1) % images.length)
-  }, 4000)
+  useEffect(() => {
+    const currentImage = setInterval(() => {
+      setCurrentImage((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // Cambia immagine ogni 3 secondi
 
+    return () => clearInterval(currentImage); // Pulisci l'intervallo al termine del componente
+  }, [images.length]);
   return (
     <div className="flex flex-col md:flex-row max-w-7xl gap-2 bg-black/20 rounded-xl p-6 mt-6 text-white text-left shadow-lg backdrop-blur-md">
       <div className='min-w-1/2 flex justify-center '>
