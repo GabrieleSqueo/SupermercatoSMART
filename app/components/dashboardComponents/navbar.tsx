@@ -3,8 +3,16 @@ import { useAuth } from '~/contexts/AuthContext'
 import { useCookies } from 'react-cookie'
 
 const Navbar = () => {
+
+    const handleLogout = () => {
+        removeCookie("carrello")
+        removeCookie("utente")
+        removeCookie("token")
+        logout()
+    }
+
     const {logout, addingProduct, authenticated, checkCarrello, retrieveOrders } = useAuth()
-    const [cookies] = useCookies(['carrello'])
+    const [cookies, setCookie, removeCookie] = useCookies(['carrello', 'utente', 'token'])
     // Calcola il totale prodotti nel carrello
     const carrello = cookies.carrello || []
     const totaleProdotti = carrello.reduce((acc: any, prod: { quantità: any }) => acc + (prod.quantità || 0), 0)
@@ -45,7 +53,7 @@ const Navbar = () => {
                 </button>
 
                 <button
-                    onClick={logout}
+                    onClick={handleLogout}
                     className="bg-red-600 text-white px-5 py-2 rounded-lg font-semibold shadow hover:bg-red-700 transition-colors focus:outline-none"
                 >
                     Logout
