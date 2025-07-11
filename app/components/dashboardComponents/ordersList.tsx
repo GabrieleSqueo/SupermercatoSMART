@@ -13,7 +13,7 @@ const OrdersList = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [cookies] = useCookies(['token', 'utente']);
+  const [cookies] = useCookies(['AccessToken', 'utente']);
 
   useEffect(() => {
     fetchOrders();
@@ -21,14 +21,14 @@ const OrdersList = () => {
 
   const fetchOrders = async () => {
     try {
-      console.log(cookies.token);
+      console.log(cookies.AccessToken);
       setLoading(true);
       setError(null);
 
       const response = await fetch(`${import.meta.env.VITE_API_URI}/api/retrieveOrders`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
-          'Authorization': `Bearer ${cookies.token}`,
+          'Authorization': `Bearer ${cookies.AccessToken}`,
           'Content-Type': 'application/json',
         },
       });

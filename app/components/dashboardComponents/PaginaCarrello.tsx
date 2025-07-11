@@ -12,7 +12,10 @@ const PaginaCarrello = () => {
           utente: cookiesUtente.utente
         }),
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${cookiesUtente.AccessToken}`
+        },
       })
 
       if (res.ok) {
@@ -22,7 +25,7 @@ const PaginaCarrello = () => {
       console.log({ message: "Errore nella richiesta", status: 500 });
     }
   }
-  const [cookiesUtente] = useCookies(['utente'])
+  const [cookiesUtente] = useCookies(['utente', 'AccessToken'])
   const [cookies, setCookie] = useCookies(['carrello'])
   const [totale, setTotale] = useState(0)
   const carrelloAttuale = cookies.carrello ? [...cookies.carrello] : []

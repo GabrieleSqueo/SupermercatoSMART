@@ -23,30 +23,37 @@ const generateTokens = (userId) => {
 
 export default async function handler(req, res) {
   await connectDB();
+
   try {
     const {email, password} = req.body;
     if (!email || !password) {
       return res.status(400).json({message: "Tutti i campi sono obbligatori"});
     }
+
     const existingUser = await User.findOne({email});
     if (!existingUser) {
       return res.status(401).json({message: "Utente non trovato"});
     }
+
     const passwordValida = await bcrypt.compare(password, existingUser.password);
     if (!passwordValida) {
       return res.status(401).json({message: "Password non valida"});
     }
+
     const { accessToken, refreshToken } = generateTokens(existingUser._id);
+
     await RefreshToken.create({ token: refreshToken, userId: existingUser._id });
-    res.setHeader('Set-Cookie', `jwt=${refreshToken}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${7 * 24 * 60 * 60}`);
+
     res.status(200).json({
       message: "Login effettuato con successo",
       user: {
         id: existingUser._id,
         email: existingUser.email
       },
-      accessToken
+      accessToken,
+      refreshToken
     });
+    
   } catch (error) {
     console.error("Errore nel middleware di login:", error);
     res.status(500).json({message: "Errore del server"});

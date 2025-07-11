@@ -4,15 +4,31 @@ import { useCookies } from 'react-cookie'
 
 const Navbar = () => {
 
-    const handleLogout = () => {
-        removeCookie("carrello")
-        removeCookie("utente")
-        removeCookie("token")
+    const handleLogout = async () => {
+        
+        const res = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ refreshToken: cookies.refreshToken })
+        })
+        
+        if (!res.ok) {
+            console.error("Errore durante il logout")
+            return
+        } else {
+            removeCookie("carrello")
+            removeCookie("utente")
+            removeCookie("AccessToken")
+            removeCookie("refreshToken")
+        }
+        console.log(res.status)
         logout()
     }
 
     const {logout, addingProduct, authenticated, checkCarrello, retrieveOrders } = useAuth()
-    const [cookies, setCookie, removeCookie] = useCookies(['carrello', 'utente', 'token'])
+    const [cookies, setCookie, removeCookie] = useCookies(['carrello', 'utente', 'AccessToken', 'refreshToken'])
     // Calcola il totale prodotti nel carrello
     const carrello = cookies.carrello || []
     const totaleProdotti = carrello.reduce((acc: any, prod: { quantità: any }) => acc + (prod.quantità || 0), 0)

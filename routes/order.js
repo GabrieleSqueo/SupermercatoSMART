@@ -16,8 +16,8 @@ router.post("/newOrder", newOrderMiddleware, async(req, res) => {
     }
 })
 
-// GET /retrieveOrders - restituisce tutti gli ordini dell'utente loggato
-router.get("/retrieveOrders", retrieveOrdersMiddleware, async (req, res) => {
+// POST /retrieveOrders - restituisce tutti gli ordini dell'utente loggato
+router.post("/retrieveOrders", retrieveOrdersMiddleware, async (req, res) => {
     try {
         const orders = await Order.find({ userId: req.userId }).sort({ _id: -1 });
         const formattedOrders = orders.map(order => ({
