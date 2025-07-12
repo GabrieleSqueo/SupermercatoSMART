@@ -2,6 +2,9 @@ import React from 'react'
 import Order from "../app/models/Order.js"
 import { connectDB } from '../db.js';
 import jwt from "jsonwebtoken"
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default async function handler(req, res) {
   await connectDB();
@@ -18,7 +21,7 @@ export default async function handler(req, res) {
       return res.status(401).json({message: "Token mancante"});
     }
     const token = authorization.split(' ')[1];
-    jwt.verify(token, PROCESS.ENV.ACCESS_TOKEN_SECRET, (err)=> {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err)=> {
       if (err) return json.sendStatus(403)
     })
 
