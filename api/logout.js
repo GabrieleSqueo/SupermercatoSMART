@@ -5,7 +5,7 @@ const logout = async (req, res) => {
     try {
         console.log("Richiesta di logout ricevuta")
         const refreshToken = req.body.refreshToken
-        console.log("Logout in corso, refreshToken:", refreshToken)
+        
         
         if (!refreshToken) {
             return res.status(400).json({ message: 'Refresh Token mancante' })
