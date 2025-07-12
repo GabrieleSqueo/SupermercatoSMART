@@ -6,7 +6,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         
-        const res = await fetch('/api/logout', {
+        const res = await fetch(`${import.meta.env.VITE_API_URI}/api/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
