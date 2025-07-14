@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     } catch (err) {
       if (err.name === 'TokenExpiredError') {
-        const refreshToken =  req.headers.refreshtoken;
+        const refreshToken =  req.body.refreshtoken;
         console.log("server "+ refreshToken)
         if (!refreshToken) return res.status(403).json({ message: "Refresh token mancante" });
 
