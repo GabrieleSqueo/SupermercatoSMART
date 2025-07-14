@@ -5,10 +5,14 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const {login} = useAuth()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setSuccessMessage("");
+    setErrorMessage("");
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URI}/api/register`, {
         body: JSON.stringify({
@@ -24,9 +28,12 @@ const Register = () => {
       if (!res.ok) {
         throw new Error(data.message || "Errore durante la registrazione");
       }
-
-      console.log("Registrazione completata");
+      setSuccessMessage("Registrazione avvenuta con successo! Ora puoi effettuare il login.");
+      setEmail("");
+      setName("");
+      setPassword("");
     } catch (error: any) {
+      setErrorMessage(error.message || "Errore durante la registrazione");
       console.error("Errore:", error.message);
     }
   };
@@ -38,6 +45,16 @@ const Register = () => {
         className="bg-white/90 p-10 rounded-3xl shadow-2xl w-full max-w-md space-y-8"
       >
         <h2 className="text-3xl font-bold italic text-center text-blue-700 mb-4">Registrati qui</h2>
+        {successMessage && (
+          <div className="bg-green-100 text-green-800 px-4 py-2 rounded mb-4 text-center font-semibold">
+            {successMessage}
+          </div>
+        )}
+        {errorMessage && (
+          <div className="bg-red-100 text-red-800 px-4 py-2 rounded mb-4 text-center font-semibold">
+            {errorMessage}
+          </div>
+        )}
         <div className="space-y-6">
           <div>
             <label className="block text-sm font-semibold text-blue-700 mb-1">Nome</label>
