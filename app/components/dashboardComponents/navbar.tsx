@@ -41,12 +41,13 @@ const Navbar = () => {
                 <h1 className="text-3xl font-bold text-white tracking-wide drop-shadow">Dashboard</h1>
             </button>
             <div className="flex gap-4">
-                <button 
-                    onClick={addingProduct}
-                    className="bg-white/90 text-blue-700 px-5 py-2 rounded-lg font-semibold shadow hover:bg-blue-100 transition-colors focus:outline-none"
-                >
-                    Aggiungi nuovi prodotti
-                </button>
+                {//<button 
+                  //  onClick={addingProduct}
+                   // className="bg-white/90 text-blue-700 px-5 py-2 rounded-lg font-semibold shadow hover:bg-blue-100 transition-colors focus:outline-none"
+                //>
+                   //</div> Aggiungi nuovi prodotti
+                //</button>
+                }
                 <div className="relative">
                   <button 
                       onClick={checkCarrello}
