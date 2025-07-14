@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
+import PopupMessage from './PopupMessage'
 
 const PaginaCarrello = () => {
 
@@ -9,7 +10,8 @@ const PaginaCarrello = () => {
         body: JSON.stringify({
           prodotti: carrelloAttuale,
           costoTotale: totale,
-          utente: cookiesUtente.utente
+          utente: cookiesUtente.utente,
+          refreshToken: cookiesUtente.refreshToken
         }),
         method: "POST",
         headers: {
@@ -18,16 +20,31 @@ const PaginaCarrello = () => {
         },
       })
 
+      const data = await res.json();
       if (res.ok) {
         setCookie("carrello", [], { path: '/' })
+        setMessage("Ordine effettuato con successo!")
+        setShowPopup(true)
+      } else if (res.status === 401) {
+        if (data.accessToken) {
+          setCookieUtente('AccessToken', data.accessToken, { path: '/' })
+          setMessage("Sessione scaduta: access token rinnovato. Riprova a inviare l'ordine.")
+          setShowPopup(true)
+        }
+      } else {
+        setMessage(data.message)
+        setShowPopup(true)
       }
     } catch (error) {
-      console.log({ message: "Errore nella richiesta", status: 500 });
+      setMessage("Errore di rete o del server. Riprova.")
+      setShowPopup(true)
     }
   }
-  const [cookiesUtente] = useCookies(['utente', 'AccessToken'])
+  const [cookiesUtente, setCookieUtente] = useCookies(['utente', 'AccessToken',"refreshToken"])
   const [cookies, setCookie] = useCookies(['carrello'])
   const [totale, setTotale] = useState(0)
+  const [message, setMessage] = useState<string | null>(null)
+  const [showPopup, setShowPopup] = useState(false)
   const carrelloAttuale = cookies.carrello ? [...cookies.carrello] : []
 
   useEffect(() => {
@@ -42,6 +59,11 @@ const PaginaCarrello = () => {
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center py-8">
       <div className="w-full max-w-lg mx-auto bg-white/90 rounded-2xl shadow-2xl p-8">
         <h2 className="text-2xl font-bold text-blue-700 text-center mb-6">Carrello</h2>
+        
+        {showPopup && message && (
+          <PopupMessage message={message} onClose={() => setShowPopup(false)} />
+        )}
+        
         {carrelloAttuale.length === 0 ? (
           <p className="text-center text-blue-700">Il carrello è vuoto.</p>
         ) : (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import PopupMessage from './PopupMessage';
 
 interface Order {
   id: string;
@@ -13,15 +14,15 @@ const OrdersList = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [cookies] = useCookies(['AccessToken', 'utente']);
+  const [cookies, setCookie] = useCookies(['AccessToken', 'utente', 'refreshToken']);
+  const [popupMessage, setPopupMessage] = useState<string | null>(null);
 
   useEffect(() => {
     fetchOrders();
   }, []);
 
-  const fetchOrders = async () => {
+  const fetchOrders = async (retry = false) => {
     try {
-      console.log(cookies.AccessToken);
       setLoading(true);
       setError(null);
 
@@ -31,26 +32,31 @@ const OrdersList = () => {
           'Authorization': `Bearer ${cookies.AccessToken}`,
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ refreshToken: cookies.refreshToken })
       });
 
-      if (!response.ok) {
-        throw new Error('Errore nel recupero degli ordini');
-      }
-
       const data = await response.json();
-      
-      if (data.success) {
+
+      if (response.ok && data.success) {
         setOrders(data.orders);
+      } else if (response.status === 401 && data.accessToken && !retry) {
+        // Token scaduto, aggiorna e riprova
+        setCookie('AccessToken', data.accessToken, { path: '/' });
+        setPopupMessage('Sessione scaduta: access token rinnovato. Ordini aggiornati.');
+        await fetchOrders(true); // Riprova una sola volta
       } else {
         setError(data.message || 'Errore nel recupero degli ordini');
+        if (data.message) setPopupMessage(data.message);
       }
     } catch (err) {
-      console.error('Errore:', err);
       setError('Errore di connessione');
+      setPopupMessage('Errore di connessione');
     } finally {
       setLoading(false);
     }
   };
+
+  const handleFetchOrders = () => { fetchOrders(); };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -102,7 +108,7 @@ const OrdersList = () => {
             <h3 className="text-xl font-bold text-gray-800 mb-2">Errore di Connessione</h3>
             <p className="text-gray-600 mb-6">{error}</p>
             <button 
-              onClick={fetchOrders}
+              onClick={handleFetchOrders}
               className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Riprova
@@ -115,6 +121,9 @@ const OrdersList = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {popupMessage && (
+        <PopupMessage message={popupMessage} onClose={() => setPopupMessage(null)} />
+      )}
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-8">
@@ -157,7 +166,7 @@ const OrdersList = () => {
               <h3 className="text-2xl font-bold text-gray-800 mb-3">Nessun ordine trovato</h3>
               <p className="text-gray-600 mb-6">Non hai ancora effettuato nessun ordine. Inizia a fare shopping!</p>
               <button 
-                onClick={fetchOrders}
+                onClick={handleFetchOrders}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 Aggiorna Lista
@@ -275,7 +284,7 @@ const OrdersList = () => {
             
             <div className="text-center pt-6">
               <button 
-                onClick={fetchOrders}
+                onClick={handleFetchOrders}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg"
               >
                 <svg className="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -11,7 +11,7 @@ const generateTokens = (userId) => {
     const accessToken = jwt.sign(
         { userId: userId }, // Payload
         process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: '15m' } // Access token a breve scadenza
+        { expiresIn: '15s' } // Access token a breve scadenza
     );
     const refreshToken = jwt.sign(
         { userId: userId }, // Payload
