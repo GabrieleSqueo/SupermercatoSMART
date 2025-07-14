@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie'
 const ProductItem = ({ prodotto }: any) => {
   const [cookies, setCookie] = useCookies(['carrello'])
   const [added, setAdded] = useState(false)
+  const [removed, setRemoved] = useState(false)
 
   const handleAdd = (prodotto: any) => {
     const carrelloAttuale = cookies.carrello ? [...cookies.carrello] : []
@@ -35,6 +36,8 @@ const ProductItem = ({ prodotto }: any) => {
         carrelloAttuale.splice(indiceTrovato, 1)
       }
       setCookie('carrello', carrelloAttuale, { path: '/' })
+      setRemoved(true)
+      setTimeout(() => setRemoved(false), 1000)
     }
   }
 
@@ -72,6 +75,11 @@ const ProductItem = ({ prodotto }: any) => {
         {added && (
           <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow animate-fade-in-out z-10">
             Aggiunto!
+          </span>
+        )}
+        {removed && (
+          <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow animate-fade-in-out z-10">
+            Rimosso!
           </span>
         )}
       </div>
