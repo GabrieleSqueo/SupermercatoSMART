@@ -3,8 +3,10 @@ import { useCookies } from 'react-cookie'
 import PopupMessage from './PopupMessage'
 
 const PaginaCarrello = () => {
+  const [loading, setLoading] = useState(false)
 
   const handleCompra = async(e: any) => {
+    setLoading(true)
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URI}/api/newOrder`, {
         body: JSON.stringify({
@@ -38,6 +40,8 @@ const PaginaCarrello = () => {
     } catch (error) {
       setMessage("Errore di rete o del server. Riprova.")
       setShowPopup(true)
+    } finally {
+      setLoading(false)
     }
   }
   const [cookiesUtente, setCookieUtente] = useCookies(['utente', 'AccessToken',"refreshToken"])
@@ -89,8 +93,10 @@ const PaginaCarrello = () => {
         </div>
         <button 
           onClick={handleCompra}
-          className="w-full mt-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow transition text-lg">
-          Compra
+          className="w-full mt-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl shadow transition text-lg"
+          disabled={loading || carrelloAttuale.length === 0}
+        >
+          {loading ? "Acquisto in corso..." : "Compra"}
         </button>
       </div>
     </div>
