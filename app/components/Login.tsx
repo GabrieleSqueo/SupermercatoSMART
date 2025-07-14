@@ -3,6 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useCookies } from 'react-cookie';
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [cookies, setCookie] = useCookies(['utente', 'AccessToken', 'refreshToken'])
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +11,7 @@ const Login = () => {
   const { authenticated, register } = useAuth();
 
   const handleSubmit = async (e: any) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URI}/api/login`, {
@@ -22,7 +24,7 @@ const Login = () => {
       });
 
       const data = await res.json();
-
+      setIsLoading(false);
       if (res.ok) {
         authenticated();
 
@@ -49,6 +51,16 @@ const Login = () => {
           >
             Ricarica la pagina
           </button>
+        </div>
+      </div>
+    );
+  }
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-700 to-cyan-400">
+        <div className="bg-white/90 p-10 rounded-3xl shadow-2xl w-full max-w-md text-center">
+          <h2 className="text-3xl font-bold italic text-blue-700 mb-4">Caricamento...</h2>
+          <p className="text-lg text-blue-700">Attendere prego...</p>
         </div>
       </div>
     );
