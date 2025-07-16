@@ -28,8 +28,9 @@ export default async function handler(req, res) {
         } catch (refreshErr) {
           return res.status(403).json({ message: "Refresh token scaduto o non valido" });
         }
+      } else {
+        return res.status(403).json({ message: "Token non valido" });
       }
-      return res.status(403).json({ message: "Token non valido" });
     }
 
     // Recupera gli ordini

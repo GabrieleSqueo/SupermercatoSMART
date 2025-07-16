@@ -6,12 +6,10 @@ const logout = async (req, res) => {
         console.log("Richiesta di logout ricevuta")
         const refreshToken = req.body.refreshToken
         
-        
         if (!refreshToken) {
             return res.status(400).json({ message: 'Refresh Token mancante' })
         }
         
-        // Assicurati che la connessione al database sia stabilita
         await connectDB()
         
         const deletedToken = await RefreshToken.findOneAndDelete({ token: refreshToken })

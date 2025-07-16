@@ -216,8 +216,8 @@ const OrdersList = () => {
                           </svg>
                           Prodotti acquistati
                         </h4>
-                                                 <div className="bg-gray-50 rounded-xl p-4 max-h-32 overflow-y-auto">
-                           <div className="text-gray-700 text-sm leading-relaxed">
+                            <div className="bg-gray-50 rounded-xl p-4 max-h-32 overflow-y-auto">
+                              <div className="text-gray-700 text-sm leading-relaxed">
                              {(() => {
                                try {
                                  const prodotti = JSON.parse(order.prodottiComprati);
